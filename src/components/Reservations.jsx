@@ -12,12 +12,25 @@ import {
 } from '../actions/machine';
 import SingleDayReservations from './SingleDayReservations';
 import './Reservations.scss';
+import moment from 'moment';
 
-const validate = values => {
-  const errors = {
-    // monday: [{ start: 'must be present' }],
-    //tuesday: { _error: 'error' },
-  };
+const validate = fields => {
+  const errors = {}
+
+  for (const fieldName in fields) {
+    const fieldErrors = fields[fieldName].map(entry => {
+      if(!moment(entry.end).isAfter(entry.start)) {
+        return {
+          end: 'Must be later'
+        }
+      }
+      
+      return null
+    })
+
+    errors[fieldName] = fieldErrors
+  }
+
   return errors;
 };
 
