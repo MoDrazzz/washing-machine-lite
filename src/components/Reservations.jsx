@@ -19,13 +19,23 @@ const validate = fields => {
 
   for (const fieldName in fields) {
     const fieldErrors = fields[fieldName].map(entry => {
+      const entryErrors = {}
+
       if(!moment(entry.end).isAfter(entry.start)) {
-        return {
-          end: 'Must be later'
-        }
+        entryErrors.end = 'Must be later'
       }
-      
-      return null
+      if(!entry.start) {
+        entryErrors.start = 'Can not be empty'  
+      }
+      if(!entry.end) {
+        entryErrors.end = 'Can not be empty'
+      }
+
+      if(Object.keys(entryErrors).length) {
+        return entryErrors
+      } else {
+        return null
+      }
     })
 
     errors[fieldName] = fieldErrors
