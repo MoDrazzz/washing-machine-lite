@@ -9,7 +9,7 @@ const TimePickerWrapper = ({
   return (
     <React.Fragment>
       <DatePicker
-        selected={value}
+        selected={value || null}
         onChange={onChange}
         showTimeSelect
         showTimeSelectOnly
