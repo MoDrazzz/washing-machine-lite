@@ -39,7 +39,7 @@ const validate = fields => {
       const entryErrors = {}
 
       if(!moment(entry.end).isAfter(entry.start)) {
-        entryErrors.end = 'Must be later'
+        entryErrors.end = 'End time should be after start time'
       }
       if(!entry.start) {
         entryErrors.start = 'Can not be empty'  
