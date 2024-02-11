@@ -14,6 +14,23 @@ import SingleDayReservations from './SingleDayReservations';
 import './Reservations.scss';
 import moment from 'moment';
 
+const checkConflict = (entries) => {
+  const sortedEntries = [...entries].sort((entryA, entryB) =>
+    new Date(entryA.start) - new Date(entryB.start)
+  );
+
+  for (let i = 0; i < sortedEntries.length - 1; i++) {
+    const currentEndTime = sortedEntries[i].end;
+    const nextStartTime = sortedEntries[i + 1].start;
+
+    if (new Date(currentEndTime) > new Date(nextStartTime)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const validate = fields => {
   const errors = {}
 
@@ -38,7 +55,19 @@ const validate = fields => {
       }
     })
 
-    errors[fieldName] = fieldErrors
+    // Check if there is any error in fieldErrors array (don't count null as an error)
+    if(fieldErrors.some(err => err)) {
+      errors[fieldName] = fieldErrors
+      continue
+    }
+
+    const isConflict = checkConflict(fields[fieldName])
+
+    if(isConflict) {
+      errors[fieldName] = {
+        _error: 'Conflict between two reservations!'
+      }
+    }
   }
 
   return errors;
