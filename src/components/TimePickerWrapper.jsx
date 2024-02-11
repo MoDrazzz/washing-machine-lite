@@ -1,5 +1,5 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
+import UTCDatePicker from './UTCDatePicker';
 
 const TimePickerWrapper = ({
   input: { onChange, value },
@@ -8,7 +8,7 @@ const TimePickerWrapper = ({
   console.log(error);
   return (
     <React.Fragment>
-      <DatePicker
+      <UTCDatePicker
         selected={value || null}
         onChange={onChange}
         showTimeSelect
