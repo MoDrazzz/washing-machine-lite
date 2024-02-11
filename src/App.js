@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Reservations } from "./components";
+import Router from "./Router";
 
 export default class App extends Component {
   render() {
-    return <Reservations />;
+    return <Router />;
   }
 }
