@@ -4,6 +4,7 @@ import { reduxForm, FieldArray, Form } from 'redux-form';
 import { Button, Container, Row, Col } from 'reactstrap';
 import _map from 'lodash/map';
 import ReactJson from 'react-json-view';
+import { checkEntriesConflict } from '../utils'
 
 import { WEEK_DAYS } from '../common/constants';
 import {
@@ -13,23 +14,6 @@ import {
 import SingleDayReservations from './SingleDayReservations';
 import './Reservations.scss';
 import moment from 'moment';
-
-const checkConflict = (entries) => {
-  const sortedEntries = [...entries].sort((entryA, entryB) =>
-    new Date(entryA.start) - new Date(entryB.start)
-  );
-
-  for (let i = 0; i < sortedEntries.length - 1; i++) {
-    const currentEndTime = sortedEntries[i].end;
-    const nextStartTime = sortedEntries[i + 1].start;
-
-    if (new Date(currentEndTime) > new Date(nextStartTime)) {
-      return true;
-    }
-  }
-
-  return false;
-};
 
 const validate = fields => {
   const errors = {}
@@ -61,7 +45,7 @@ const validate = fields => {
       continue
     }
 
-    const isConflict = checkConflict(fields[fieldName])
+    const isConflict = checkEntriesConflict(fields[fieldName])
 
     if(isConflict) {
       errors[fieldName] = {

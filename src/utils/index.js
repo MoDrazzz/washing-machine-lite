@@ -1,0 +1,1 @@
+export { checkEntriesConflict } from './checkEntriesConflict'
