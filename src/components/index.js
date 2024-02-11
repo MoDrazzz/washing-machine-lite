@@ -1,3 +1,2 @@
-import Reservations from "./Reservations";
-
-export { Reservations };
+export { default as Reservations } from "./Reservations"
+export { default as Header } from "./Header"
