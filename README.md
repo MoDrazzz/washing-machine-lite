@@ -1,3 +1,16 @@
+#### My comments on the task
+
+The task was pretty complex for me, taking into consideration I have no experience with redux.
+
+Problems on the way:
+- Installation: It turned out, my node version was too high for this project, so I had to downgrade it using nvm. I have used nvm before, but never came acroos too high version problem - something new!
+- Codebase acclimatization: No typescript, wow! :D I started with App.js and looked through each file to understand how the project is running. Also I googled redux-form and walked through the docs to make it clear for me.
+- Quick fix: I noticed right away there was some error in the console about types in DatePicker, so I fixed it.
+- Tasks: Validation implementation wasn't too complex task, except one thing. When I needed to check whether two reservations on same day collide, I noticed some problems with Dates comparison. After copying logged date objects, it turned out two same times vary with milliseconds difference. I took good time parsing the dates using wrapper (UTCDatePicker.tsx). Also it fixed UTC and local times differences (https://github.com/JohnStarich/sage/blob/b422b0ccef05fffe29143f335017ad2fc24f76fc/web/src/UTCDatePicker.js)
+I decided react-router would be just fine for routing. I implemented it with simple navigation. Unfortunately, my clock runs out and I have no more time today - so I have to leave it right here. Since I have no experience with redux also, it would take me quite a while to implement the rest of the task.
+
+I regret I didn't start with this exercise, so I would finish it earlier and left the easier ones undone (javascript ones).
+
 # Washing Machine manager
 
 Create an application that allows to book washing machine reservations.
